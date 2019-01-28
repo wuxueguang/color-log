@@ -15,19 +15,16 @@ const styleStr = function({color, background}){
 
 const log = function() {
 	let args = [...arguments];
-	let type = typeof args[0];
-	if (type === 'object') {
-		if (args[0].isLogStyle) {
+	if (typeof args[0] === 'string') {
+		console.log(...[`%c ${args[0]}`, this.style, ...args.slice(1)]);
+	} else {
+		if (args[0] instanceof Object && args[0].isLogStyle) {
 			this.styleObj = Object.assign({}, this.styleObj, args[0]);
 			this.style = styleStr(this.styleObj);
 			args.length > 1 && log(...args.slice(1));
 		} else {
 			console.log(...args);
 		}
-	} else if(type === 'string'){
-		console.log(...[`%c ${args[0]}`, this.style, ...args.slice(1)]);
-	} else{
-		console.log(...args);
 	}
 }
 
