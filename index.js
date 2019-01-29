@@ -21,7 +21,7 @@ const log = function() {
 		if (args[0] instanceof Object && args[0].isLogStyle) {
 			this.styleObj = Object.assign({}, this.styleObj, args[0]);
 			this.style = styleStr(this.styleObj);
-			args.length > 1 && log(...args.slice(1));
+			args.length > 1 && this.apply(this, args.slice(1));
 		} else {
 			console.log(...args);
 		}
