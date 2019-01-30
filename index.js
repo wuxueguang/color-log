@@ -9,8 +9,14 @@ style object example:
 */
 
 
-const styleStr = function({color, background}){
-	return `color:${color};background:${background}`;
+const styleStr = function(styleObj){
+	let styleStr = '';
+
+	Object.keys(styleObj).forEach(name => {
+		styleStr += `${ name.replace(/[A-Z]/g, char => `-${char.toLowerCase()}`) }:${styleObj[name]};`;
+	});
+
+	return styleStr.replace(/;$/, '');
 }
 
 const log = function() {
@@ -30,7 +36,9 @@ const log = function() {
 
 log.styleObj = {
 	color: '#0f0',
-	background: '#000'
+	background: '#000',
+	fontWeight: 'bold',
+	fontSize: '16px;'
 }
 
 log.style = styleStr(log.styleObj);
