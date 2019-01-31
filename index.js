@@ -1,5 +1,5 @@
 const styleStr = styleObj => Object.keys(styleObj).reduce((styleStr, name) => (
-	styleStr + `${ name.replace(/[A-Z]/g, c => `-${c.toLowerCase()}`) }:${styleObj[name]};`
+	styleStr + `${name.replace(/[A-Z]/g, c => `-${c.toLowerCase()}`)}:${styleObj[name]};`
 ), '');
 
 const log = function() {
