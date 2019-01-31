@@ -1,8 +1,6 @@
-const styleStr = function(styleObj){
-	return Object.keys(styleObj).reduce((styleStr, name) => {
-		return styleStr + `${ name.replace(/[A-Z]/g, char => `-${char.toLowerCase()}`) }:${styleObj[name]};`;
-	}, '').replace(/;$/, '');
-}
+const styleStr = styleObj => Object.keys(styleObj).reduce((styleStr, name) => (
+	styleStr + `${ name.replace(/[A-Z]/g, c => `-${c.toLowerCase()}`) }:${styleObj[name]};`
+), '').replace(/;$/, '');
 
 const log = function() {
 	let args = [...arguments];
