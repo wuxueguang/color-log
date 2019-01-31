@@ -1,22 +1,7 @@
-/**
-style object example:
-
-{
-	color: '#0f0',
-	background: '#000',
-	isLogStyle: true
-}
-*/
-
-
 const styleStr = function(styleObj){
-	let styleStr = '';
-
-	Object.keys(styleObj).forEach(name => {
-		styleStr += `${ name.replace(/[A-Z]/g, char => `-${char.toLowerCase()}`) }:${styleObj[name]};`;
-	});
-
-	return styleStr.replace(/;$/, '');
+	return Object.keys(styleObj).reduce((styleStr, name) => {
+		return styleStr + `${ name.replace(/[A-Z]/g, char => `-${char.toLowerCase()}`) }:${styleObj[name]};`;
+	}, '').replace(/;$/, '');
 }
 
 const log = function() {
@@ -38,7 +23,7 @@ log.styleObj = {
 	color: '#0f0',
 	background: '#000',
 	fontWeight: 'bold',
-	fontSize: '16px;'
+	fontSize: '12px'
 }
 
 log.style = styleStr(log.styleObj);
