@@ -1,13 +1,15 @@
+
+const type = arr => /^\[object (.*)\]/.exec(Object.prototype.toString.call(arr))[1].toLowerCase();
+
 const styleStr = styleObj => Object.keys(styleObj).reduce((styleStr, name) => (
 	styleStr + `${name.replace(/[A-Z]/g, c => `-${c.toLowerCase()}`)}:${styleObj[name]};`
 ), '');
 
-const log = function() {
-	let args = [...arguments];
-	if (typeof args[0] === 'string') {
+const log = function(...args) {
+	if (type(args[0]) === 'string') {
 		console.log(...[`%c${args[0]}`, this.style, ...args.slice(1)]);
 	} else {
-		if (args[0] instanceof Object && args[0].isLogStyle) {
+		if (type(args[0]) === 'object' && args[0].isLogStyle) {
 			Object.assign(this.styleObj, args[0]);
 			this.style = styleStr(this.styleObj);
 			args.length > 1 && this.apply(this, args.slice(1));
